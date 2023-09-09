@@ -41,7 +41,7 @@ const Forecast = ({
   return (
     <div className="w-full md:max-w-[500px] py-4 md:py-4 md:px-10 lg:px-24 h-full lg:h-auto bg-white bg-opacity-20 backdrop-blur-ls rounded drop-shadow-lg">
       <div className="mx-auto w-[300px]">
-        <div className="relative flex mt-10 mb-5 pl-5 md:mt-4">
+        <div className="relative flex mt-5 mb-5 pl-5 md:mt-4">
           <SearchInput
             term={term}
             options={options}

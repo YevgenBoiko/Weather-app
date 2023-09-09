@@ -21,10 +21,10 @@ function SearchInput({
       <input
         type="text"
         value={term}
-        className="px-2 py-1 rounded-l-md border-2 border-white"
+        className="px-2 py-1 rounded-l-md rounded-none border-2 border-black border-opacity-20 bg-transparent"
         onChange={onInputChange}
       />
-      <ul className="absolute top-9 bg-white ml-1 rounded-b-md">
+      <ul className="absolute top-9 bg-white bg-opacity-90 ml-1 rounded-b-md">
         {options.map((option: optionType, index: number) => (
           <li key={option.name + "-" + index}>
             <button
@@ -38,7 +38,7 @@ function SearchInput({
       </ul>
 
       <button
-        className="rounded-r-md border-2 border-zinc-100 hover:border-zinc-500 hover:text-zinc-500 text-zinc-100 px-2 py-1 cursor-pointer"
+        className="rounded-r-md border-2 border-black border-opacity-20 hover:border-white hover:text-white text-black text-opacity-40   px-2 py-1 cursor-pointer"
         onClick={onSubmit}
       >
         search
