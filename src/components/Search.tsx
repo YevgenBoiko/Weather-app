@@ -1,13 +1,13 @@
-import { ChangeEvent } from 'react'
-import { optionType } from '../types'
+import { ChangeEvent } from "react";
+import { optionType } from "../types";
 
 type Props = {
-  term: string
-  options: []
-  onInputChange: (e: ChangeEvent<HTMLInputElement>) => void
-  onOptionSelect: (option: optionType) => void
-  onSubmit: () => void
-}
+  term: string;
+  options: [];
+  onInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onOptionSelect: (option: optionType) => void;
+  onSubmit: () => void;
+};
 
 const Search = ({
   term,
@@ -35,12 +35,12 @@ const Search = ({
           />
           <ul className="absolute top-9 bg-white ml-1 rounded-b-md">
             {options.map((option: optionType, index: number) => (
-              <li key={option.name + '-' + index}>
+              <li key={option.name + "-" + index}>
                 <button
                   className="text-left text-sm w-full hover:bg-zinc-700 hover:text-white px-2 py-1 cursor-pointer"
                   onClick={() => onOptionSelect(option)}
                 >
-                  {option.name}
+                  {option.name},{option.country}
                 </button>
               </li>
             ))}
@@ -55,7 +55,7 @@ const Search = ({
         </div>
       </section>
     </main>
-  )
-}
+  );
+};
 
-export default Search
+export default Search;

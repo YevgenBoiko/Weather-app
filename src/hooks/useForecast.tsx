@@ -1,11 +1,11 @@
-import { ChangeEvent, useEffect, useState } from 'react'
-import { optionType, forecastType } from '../types'
+import { ChangeEvent, useEffect, useState } from "react";
+import { optionType, forecastType } from "../types";
 
 const useForecast = () => {
-  const [term, setTerm] = useState<string>('')
-  const [city, setCity] = useState<optionType | null>(null)
-  const [options, setOptions] = useState<[]>([])
-  const [forecast, setForecast] = useState<forecastType | null>(null)
+  const [term, setTerm] = useState<string>("");
+  const [city, setCity] = useState<optionType | null>(null);
+  const [options, setOptions] = useState<[]>([]);
+  const [forecast, setForecast] = useState<forecastType | null>(null);
 
   const getSearchOptions = (value: string) => {
     fetch(
@@ -15,16 +15,17 @@ const useForecast = () => {
     )
       .then((res) => res.json())
       .then((data) => setOptions(data))
-  }
+      .catch((e) => console.log(e));
+  };
 
   const onInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value.trim()
-    setTerm(value)
+    const value = e.target.value.trim();
+    setTerm(value);
 
-    if (value === '') return
+    if (value === "") return;
 
-    getSearchOptions(value)
-  }
+    getSearchOptions(value);
+  };
 
   const getForecast = (city: optionType) => {
     fetch(
@@ -32,32 +33,40 @@ const useForecast = () => {
     )
       .then((res) => res.json())
       .then((data) => {
+        console.log(
+          new Date(
+            (data.list[0].dt + data.city.timezone) * 1000
+          ).getUTCHours() +
+            new Date().getTimezoneOffset() / 60
+        );
+
         const forecastData = {
           ...data.city,
           list: data.list.slice(0, 16),
-        }
+        };
 
-        setForecast(forecastData)
+        setForecast(forecastData);
       })
-  }
+      .catch((e) => console.log(e));
+  };
 
   const onSubmit = () => {
-    if (!city) return
-    getForecast(city)
-  }
+    if (!city) return;
+    getForecast(city);
+  };
 
   const onOptionSelect = (option: optionType) => {
-    setCity(option)
-  }
+    setCity(option);
+  };
 
   useEffect(() => {
     if (city) {
-      setTerm(city.name)
-      setOptions([])
+      setTerm(city.name);
+      setOptions([]);
     }
-  }, [city])
+  }, [city]);
 
-  return { term, options, forecast, onInputChange, onOptionSelect, onSubmit }
-}
+  return { term, options, forecast, onInputChange, onOptionSelect, onSubmit };
+};
 
-export default useForecast
+export default useForecast;
