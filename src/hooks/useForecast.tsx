@@ -15,7 +15,6 @@ const useForecast = () => {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data);
         setOptions(data);
       })
       .catch((e) => console.log(e));
