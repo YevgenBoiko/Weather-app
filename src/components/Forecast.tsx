@@ -1,3 +1,4 @@
+import { ChangeEvent } from "react";
 import {
   getHumidityValue,
   getPop,
@@ -5,12 +6,21 @@ import {
   getVisibilityValue,
   getWindDirection,
 } from "../helpers";
-import { forecastType } from "../types";
+import { forecastType, optionType } from "../types";
 import Sunrise from "./Icons/Sunrise";
 import Sunset from "./Icons/Sunset";
 import Tile from "./Tile";
 
-type Props = { data: forecastType };
+import SearchInput from "./SearchInput";
+
+type Props = {
+  data: forecastType;
+  term: string;
+  options: [];
+  onInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  onOptionSelect: (option: optionType) => void;
+  onSubmit: () => void;
+};
 
 const Degree = ({ temp }: { temp: number }): JSX.Element => (
   <span>
@@ -19,11 +29,27 @@ const Degree = ({ temp }: { temp: number }): JSX.Element => (
   </span>
 );
 
-const Forecast = ({ data }: Props): JSX.Element => {
+const Forecast = ({
+  data,
+  term,
+  options,
+  onInputChange,
+  onOptionSelect,
+  onSubmit,
+}: Props): JSX.Element => {
   const today = data.list[0];
   return (
     <div className="w-full md:max-w-[500px] py-4 md:py-4 md:px-10 lg:px-24 h-full lg:h-auto bg-white bg-opacity-20 backdrop-blur-ls rounded drop-shadow-lg">
       <div className="mx-auto w-[300px]">
+        <div className="relative flex mt-10 mb-5 pl-5 md:mt-4">
+          <SearchInput
+            term={term}
+            options={options}
+            onInputChange={onInputChange}
+            onOptionSelect={onOptionSelect}
+            onSubmit={onSubmit}
+          />
+        </div>
         <section className="text-center">
           <h2 className="text-2xl font-black">
             {data.name} <span className="font-thin">{data.country}</span>
