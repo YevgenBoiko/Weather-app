@@ -7,7 +7,8 @@ const App = (): JSX.Element => {
     useForecast();
 
   return (
-    <main className="h-full flex overflow-x-scroll justify-center md:p-20 bg-gradient-to-br from-sky-400 via-rose-400 to-lime-400 w-full">
+    <main className="h-full flex overflow-x-scroll justify-center md:p-20 bg-gradient-to-br from-blue-800   to-gray-400  w-full">
+      {/* via-rose-400 to-lime-400 */}
       {forecast ? (
         <Forecast
           data={forecast}
